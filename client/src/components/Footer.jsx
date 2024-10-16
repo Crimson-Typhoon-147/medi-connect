@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import playstore from "../assets/favicon2.png";
 import {
   FaGithub,
   FaRegCopyright,
@@ -11,7 +10,6 @@ import {
 import { FaXTwitter } from 'react-icons/fa6'; // Corrected import for Twitter icon
 import GoogleTranslate from './GoogleTranslate';
 import Chatbot from '../Medical-Chatbot/Chatbot';
-// import { FaArrowUp } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -72,16 +70,8 @@ const Footer = () => {
     { name: 'Customer Care', path: '/customer-care' },
   ];
 
-  // const handleRating = (value) => {
-  //     setRating(value);
-  // };
-
-  // const submitRating = () => {
-  //     alert(`Thank you for rating us ${rating} out of 5! Comment: ${comment}`);
-  //     setIsModalOpen(false);
-  //     setRating(0);
-  //     setComment('');
-  // };
+  // Define feedback form
+  const feedbackLinks = [{ name: 'Patient Feedback', path: '/feedback' }];
 
   return (
     <footer className="bg-gradient-to-r from-[#1f2937] via-[#133859] to-[#1f2937]  p-8 text-white">
@@ -93,7 +83,6 @@ const Footer = () => {
               to="/"
               className="flex items-center gap-2 group transition-all duration-300 ease-in-out transform hover:scale-105"
             >
-              {/* Adjusted hover text colors */}
               <img
                 src="../favicon.png"
                 className="h-10 w-10 transition-transform duration-300 group-hover:rotate-6"
@@ -162,9 +151,34 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Connect with Us and Legal */}
+          {/* Feedback Link */}
           <div>
-            {/* Social Media Links */}
+            <h3 className='text-lg font-semibold mb-4 relative inline-block after:content-[""] after:absolute after:w-0 after:h-0.5 after:bg-[#b6dbfc] after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full'>
+              Feedback
+            </h3>
+            <ul className="space-y-2">
+              {feedbackLinks.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="flex items-center group">
+                    <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">
+                      ›
+                    </span>
+                    <span className="relative overflow-hidden">
+                      <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
+                        {link.name}
+                      </span>
+                      <span className="absolute top-0 left-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-[#b6dbfc]">
+                        {link.name}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social Media and Legal */}
+          <div>
             <h3 className='text-lg font-semibold mb-4 relative inline-block after:content-[""] after:absolute after:w-0 after:h-0.5 after:bg-[#b6dbfc] after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full'>
               Follow us on
             </h3>
@@ -194,83 +208,40 @@ const Footer = () => {
                   }}
                   aria-label={`Social media link ${index + 1}`}
                 >
-                  <Icon size={20} />
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
-
-            <div className="flex items-center mt-6">
-              <img
-                src="/google.png"
-                alt="Google Translate"
-                className="h-8 w-8 mr-2"
-              />
-              <GoogleTranslate />
-            </div>
-
-            {/* Legal Links */}
-            <h3 className='text-lg font-semibold mt-6 mb-4 relative inline-block after:content-[""] after:absolute after:w-0 after:h-0.5 after:bg-[#b6dbfc] after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full text-yellow'>
-              Contact Us
-            </h3>
-            <ul className="space-y-2">
-              {contactUsLinks.map((item) => (
-                <li key={item.name}>
-                  <Link to={item.path} className="flex items-center group">
-                    <span className="mr-2 transition-transform duration-300 group-hover:translate-x-1">
-                      ›
-                    </span>
-                    <span className="relative overflow-hidden">
-                      <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
-                        {item.name}
-                      </span>
-                      <span className="absolute top-0 left-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-[#b6dbfc]">
-                        {item.name}
-                      </span>
-                    </span>
-                  </Link>
-                </li>
+            <div className="flex flex-col space-y-1">
+              {contactUsLinks.map((link) => (
+                <Link key={link.name} to={link.path} className="text-sm">
+                  {link.name}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
-
-        <div className="mt-8 pt-8 border-t border-[#b6dbfc]/30 text-center">
-          <p className="font-bold bg-gradient-to-r from-[#b6dbfc] to-[#b6dbfc] bg-clip-text text-transparent group-hover:from-[#133859] group-hover:to-[#b6dbfc] transition-all duration-300">
-            DISCLAIMER
-          </p>
-          <p className="text-gray-300 text-sm md:text-base mt-2">
-            “The information provided on Med-Space is intended for general
-            informational purposes only and should not be considered as medical
-            advice, diagnosis, or treatment. Always seek the advice of a
-            qualified healthcare provider for any medical condition or
-            treatment. Med-Space facilitates OPD appointment booking and
-            hospital data sharing, but it does not endorse or guarantee the
-            quality of services provided by healthcare providers.”
-          </p>
-        </div>
-
-        <div className="mt-8 pt-8 border-t border-[#b6dbfc]/30 text-center">
-          <p className="flex items-center justify-center text-sm">
-            <FaRegCopyright className="mx-1" /> {currentYear} All Rights
-            Reserved
-            <span className="font-bold ml-2 bg-[#b6dbfc] text-[#1f2937] px-2 py-1 rounded transition-all duration-300 hover:bg-[#1f2937] hover:text-[#b6dbfc]">
-              Medi Connect
-            </span>
-          </p>
-        </div>
-
-        <div
-          className={`fixed bottom-4 right-6 flex flex-col gap-3 duration-300 delay-300 ${!showScrollTop && 'translate-y-[75px]'}`}
-        >
-          <Chatbot />
-          <button
-            onClick={scrollToTop}
-            className={` bg-blue-600 hover:shadow-inner:bg-blue-500 text-white p-3 md:p-4 rounded-full z-[1000] transition-all ${!showScrollTop && 'opacity-0 invisible'}`}
-          >
-            <FaArrowUp size={24} />
-          </button>
-        </div>
       </div>
+
+      <div className="flex justify-between items-center mt-8">
+        <p className="flex items-center space-x-1 text-sm">
+          <FaRegCopyright className="inline-block" />
+          <span>{currentYear} Med Space. All rights reserved.</span>
+        </p>
+        <GoogleTranslate />
+        <Chatbot />
+      </div>
+
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button
+          className="fixed bottom-5 right-5 bg-[#b6dbfc] text-[#133859] p-3 rounded-full shadow-lg transition-transform duration-300 transform hover:scale-110"
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </footer>
   );
 };
